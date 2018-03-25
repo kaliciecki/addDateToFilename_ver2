@@ -4,8 +4,14 @@
 #eg. if our file was named file1.txt it would rename it to file1_ 2018-03-24.
 #Use basename comannd.
 
-for (( i=1; i<=$#; i++ ))
+if [ -z "$1" ]
+	then
+		printf "\nPlease specify files after script.\nClosing\n"
+	else
+		for (( i=1; i<=$#; i++ ))
 	do
-FILE=$(readlink -f $(echo $@ | cut -d " " -f $i ))
-mv $FILE $(echo | basename $FILE | cut -d. -f1)-$(date +%d_%m_%Y)
-done
+		FILE=$(readlink -f $(echo $@ | cut -d " " -f $i ))
+		mv $FILE $(echo | basename $FILE | cut -d. -f1)-$(date +%d_%m_%Y)
+
+	done
+fi
